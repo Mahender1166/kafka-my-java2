@@ -34,15 +34,15 @@ public class ProducerSentenceRandom {
 
     org.apache.kafka.clients.producer.Producer producer = new KafkaProducer(configProperties);
 
-    // Make our own messages - create your custom logic here
+    
 
     for (int i = 1; i <= 5; i++) {
-      String message = createSentence();
-      ProducerRecord<String, String> rec = new ProducerRecord<String, String>(topicName, message);
+      String price= getPrice();
+      ProducerRecord<String, String> rec = new ProducerRecord<String, String>(topicName, price);
       producer.send(rec);
     }
 
-    // still allow input from keyboard
+    
 
     String line = in.nextLine();
     while (!line.equals("exit")) {
@@ -56,7 +56,7 @@ public class ProducerSentenceRandom {
 
   }
 
-  private static String createSentence() {
+  private static String getPrice() {
     String[] items = { "water bottle", "tissue", "t-shirt", "pillow", "comforter" };
 
     String[] costs = { "10.99$", "5.99$", "2.99$", "7.99$", "9.99$" };
@@ -64,8 +64,8 @@ public class ProducerSentenceRandom {
     Random r = new Random();
 
     int count = 3;
-    int minIndex = 0;
-    int maxIndex = 4;
+    int min = 0;
+    int max = 4;
 
     int[] randoms = r.ints(count, minIndex, maxIndex).toArray();
 
